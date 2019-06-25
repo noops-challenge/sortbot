@@ -143,7 +143,7 @@ def post_json(path, body)
 end
 
 def build_uri(path)
-  URI.parse("http://localhost:3004" + path)
+  URI.parse("https://api.noopschallenge.com" + path)
 end
 
 main()
