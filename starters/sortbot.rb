@@ -132,7 +132,7 @@ def post_json(path, body)
   post_request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
   post_request.body = JSON.generate(body)
 
-  response = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => false) do |http|
+  response = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
     http.request(post_request)
   end
 
