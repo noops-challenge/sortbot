@@ -58,8 +58,8 @@ def main
     puts "\n\nEnter your order here, please.\n\n"
 
     # for manual entry
-    #solution = gets.delete("\n")
-    solution = next_set["question"].sort.join(',')
+    solution = gets.delete("\n")
+    # solution = next_set["question"].sort.join(',')
     puts solution
     puts "\n\nInteresting choice, let's see if it's correct...\n\n"
 
@@ -143,6 +143,7 @@ def post_json(path, body)
 end
 
 def build_uri(path)
+  # URI.parse("http://localhost:3004" + path)
   URI.parse("https://api.noopschallenge.com" + path)
 end
 
