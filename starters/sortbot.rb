@@ -14,7 +14,7 @@ end
 
 def main
   puts "🤖 " *24
-  puts "noop " *1000
+  puts "noop " *100
   puts "🤖 " *24
 
   puts
@@ -31,6 +31,12 @@ def main
     "Hey, just the username please.",
     "All I'm asking for is a username here.",
     "OK but first your GitHub username."
+  ]
+
+  choice_messages = [
+    "Interesting choice, let's see if it's correct...",
+    "That seems like something you would say.",
+    "Really? Sigh. OK, let's see what the boss says."
   ]
 
   username = gets.delete("\n")
@@ -52,16 +58,17 @@ def main
 
   # Answer each question, as log as we are correct
   loop do
-
-    puts "Please organize this set."
+    #puts next_set
+    puts next_set['message']
+    puts "\nExample: #{next_set['exampleSolution']}\n\n"
     puts next_set['question'].to_s
     puts "\n\nEnter your order here, please.\n\n"
 
     # for manual entry
     solution = gets.delete("\n")
     # solution = next_set["question"].sort.join(',')
-    puts solution
-    puts "\n\nInteresting choice, let's see if it's correct...\n\n"
+    #puts solution
+    puts "\n\n#{choice_messages.sample}\n\n"
 
     show_wait_cursor(rand(0.5..3))
 
@@ -71,8 +78,9 @@ def main
     end
 
     # send to sortbot
-    formatted_solution = solution.split(',').map {|i| (i.to_i.to_s != i) ? i: i.to_i }
-    puts formatted_solution
+    formatted_solution = JSON.parse(solution)
+
+    #puts formatted_solution
     solution_result = send_solution(set_path, formatted_solution)
 
     if solution_result['result'] == 'finished'
@@ -84,7 +92,7 @@ def main
       next_set = get_json(set_path)
     else
       puts "#{"💩 "*10}\n\n"
-      puts "Sorry, that's not correct.\n\n"
+      puts "Sorry, that's not correct: #{solution_result['message']}\n\n"
     end
   end
 end
@@ -143,7 +151,7 @@ def post_json(path, body)
 end
 
 def build_uri(path)
-  # URI.parse("http://localhost:3004" + path)
+  #URI.parse("http://localhost:3004" + path)
   URI.parse("https://api.noopschallenge.com" + path)
 end
 
