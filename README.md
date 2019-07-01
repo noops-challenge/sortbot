@@ -1,4 +1,3 @@
-
 ![sortbot](https://user-images.githubusercontent.com/212941/60106744-95d1a880-971a-11e9-893c-886e0a1ec592.png)
 
 # 👋 Meet Sortbot
@@ -11,7 +10,7 @@ Take the sortbot exam—where the sets get more and more complicated—and compa
 
 ## 📖 How does it work?
 
-To start an exam, access:
+To start an exam `GET`:
 
 `https://api.noopschallenge.com/sortbot/exam`
 
@@ -21,7 +20,9 @@ The first question is easy—enter your GitHub username.
 
 Now we're getting somewhere! The exam is timed, so be quick.
 
-The exam follows the same API pattern as the [Mazebot](https://github.com/noops-challenge/mazebot). When you `POST` your username, you'll receive a URL back from the API named `nextSet`—that URL has your `state` in it, and that's how Sortbot keeps track of where you are in the exam.
+The exam follows the same API pattern as the [Mazebot](https://github.com/noops-challenge/mazebot).
+
+When you `POST` your username, you'll receive a URL back from the API named `nextSet`—that URL has your `state` in it, and that's how Sortbot keeps track of where you are in the exam.
 
 When you `GET` a request to `/sortbot/exam/{state}` you'll receive a JSON array with a `question` and `instruction`.
 
